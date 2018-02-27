@@ -1,0 +1,24 @@
+{
+  "name": "vue-iclock",
+  "version": "0.0.0",
+  "description": "a cute clock components with vuejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itagn/vue-iclock.git"
+  },
+  "keywords": [
+    "vue",
+    "clock",
+    "component"
+  ],
+  "author": "itagn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/itagn/vue-iclock/issues"
+  },
+  "homepage": "https://github.com/itagn/vue-iclock#readme"
+}
