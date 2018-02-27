@@ -1,3 +1,5 @@
-module.exports = {
-    Iclock: require('./example/Iclock.vue')
-};
+import Iclock from './src/vue-iclock.vue';
+
+export { 
+	Iclock 
+}
