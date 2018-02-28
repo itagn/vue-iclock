@@ -10,11 +10,13 @@
 ## screenshot
 you can try to move the mouse to the smiling face.  
 
-    if you set display.type = 'clock'
+    if you set display.type = 'clock' && set display.language = 'zh' or 'en'
 
-![clock.png](https://github.com/itagn/vue-iclock/raw/master/img/clock.png)
+![clock-zh.png](https://github.com/itagn/vue-iclock/raw/master/img/clock-zh.png)
 
-    if you set display.type = 'text' && display.info = 'Itagn' 
+![clock-en.png](https://github.com/itagn/vue-iclock/raw/master/img/clock-en.png)
+
+    if you set display.type = 'text' && set display.info = 'Itagn' 
 
 ![text.png](https://github.com/itagn/vue-iclock/raw/master/img/text.png)
 
