@@ -15,7 +15,7 @@ you can try to move the mouse to the smiling face.
 
 ![clock.png](https://github.com/itagn/vue-iclock/raw/master/img/clock.png)
 
-    if you set display.type = 'text' && display.info = 'itagn' 
+    if you set display.type = 'text' && display.info = 'Itagn' 
 
 ![text.png](https://github.com/itagn/vue-iclock/raw/master/img/text.png)
 
@@ -69,8 +69,11 @@ In order to judge display clock or text by setting display
             type: 'clock',  //  value: 'clock' || 'text'
             info: 'o w o',  //  if this.type is 'text', and show this.info
             scale: 1,  //  Magnification
-            fontColor: 'orange',  //  show font-color
-            fontSize: '1.5rem'  //  show font-size
+            language: 'en',  //  language
+            dateColor: '#999',  //  set date-color
+            fontColor: 'orange',  //  set font-color
+            fontSize: '1.5rem',  //  set font-size
+            fontStyle: 'Helvetica,"Microsoft YaHei"' // set font-family
         }
 
 ## Contributing
