@@ -1,6 +1,6 @@
 {
   "name": "vue-iclock",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "a cute clock components with vuejs",
   "main": "index.js",
   "scripts": {
@@ -12,8 +12,7 @@
   },
   "keywords": [
     "vue",
-    "clock",
-    "canvas"
+    "clock"
   ],
   "author": "itagn",
   "license": "MIT",

@@ -1,6 +1,6 @@
 <template>
   <div class="iclock">
-    <canvas class="iclock-canvas"></canvas>
+    <div class="iclock-show" :title="show">{{ show }}</div>
     <div class="iclock-body">
       <div class="iclock-left-eyes"></div>
       <div class="iclock-right-eyes"></div>
@@ -12,48 +12,67 @@
   </div>
 </template>
 <script>
-export default{
-  data (){
-    return {
-      canvas: null,
-      ctx: null,
-      timer: null
-    }
-  },
-  mounted() {
-    this.canvas = document.querySelector(".iclock .iclock-canvas");
-    this.ctx = this.canvas.getContext("2d");
-    this.init();
-    this.loop();
-  },
-  methods: {
-    init(){
-      var _this = this;
-      _this.ctx.font = "4rem Arial";
-      _this.ctx.color = "#22ade4";
-      _this.ctx.textAlign = "center";
-      _this.ctx.textBaseline = "middle";
-      _this.ctx.fillText(_this.getDate(), 150, 80);
+  export default{
+    props: {
+      display: {
+        type: Object
+      }
     },
-    loop(){
-      var _this = this;
-      this.timer = setInterval(function () {
-        _this.ctx.clearRect(0, 0, _this.canvas.width, _this.canvas.height);
-        _this.ctx.fillText(_this.getDate(), 150, 80);
-      }, 1000);
+    data (){
+      return {
+        dom: null,
+        show: null,
+        timer: null,
+        font: {}
+      }
     },
-    getDate(){
-      var date = new Date();
-      var h = date.getHours()+'';
-      h = h.length === 2 ? h : '0'+h;
-      var m = date.getMinutes()+'';
-      m = m.length === 2 ? m : '0'+m;
-      var s = date.getSeconds()+'';
-      s = s.length === 2 ? s : '0'+s;
-      return h+':'+m+':'+s;
+    created(){
+      this.font = {
+        type: this.display.type || 'clock',
+        info: this.display.info || 'o w o',
+        fontSize: this.display.fontSize || '1.5rem',
+        fontColor: this.display.fontColor || 'orange' || '#d4726f',
+        fontStyle: this.display.fontStyle || "'Helvetica Neue',Helvetica,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',Arial,sans-serif"
+      }
+    },
+    mounted() {
+      this.dom = document.querySelector(".iclock .iclock-show");
+      this.dom.style.color = this.font.fontColor;
+      this.dom.style.fontSize = this.font.fontSize;
+      this.dom.style.fontFamily = this.font.fontStyle;
+      this.init();
+    },
+    methods: {
+      init(){
+        if(this.font.type === 'clock'){
+          this.show = this.getDate();
+          this.loop();
+        } else if(this.font.type === 'text'){
+          this.show = this.font.info;
+        } else {
+          this.dom.style.color = '#c23531';
+          this.show = "Error~";
+          console.error('Error: props[display].type should be "clock" or "text".');
+        }
+      },
+      loop(){
+        var _this = this;
+        this.timer = setInterval(function () {
+          _this.show = _this.getDate();
+        }, 1000);
+      },
+      getDate(){
+        var date = new Date();
+        var h = date.getHours()+'';
+        h = h.length === 2 ? h : '0'+h;
+        var m = date.getMinutes()+'';
+        m = m.length === 2 ? m : '0'+m;
+        var s = date.getSeconds()+'';
+        s = s.length === 2 ? s : '0'+s;
+        return h+':'+m+':'+s;
+      }
     }
   }
-}
 </script>
 <style>
   .iclock{
@@ -62,17 +81,23 @@ export default{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 10;
   }
-  .iclock > .iclock-canvas{
-    width: 100%;
-    height: 70px;
-    border: 1px solid #666;
-    transform: rotateZ(12deg);
-    -webkit-transform: rotateZ(12deg);
-    -moz-transform: rotateZ(12deg);
-    -o-transform: rotateZ(12deg);
-    -ms-transform: rotateZ(12deg);
+  .iclock > .iclock-show{
+    width: 97%;
+    height: 40px;
+    line-height:1.4em;
+    text-align: center;
+    user-select: all;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
     cursor: pointer;
+    /*transform: rotateZ(12deg);*/
+    /*-webkit-transform: rotateZ(12deg);*/
+    /*-moz-transform: rotateZ(12deg);*/
+    /*-o-transform: rotateZ(12deg);*/
+    /*-ms-transform: rotateZ(12deg);*/
   }
   .iclock > .iclock-body{
     position: relative;
@@ -82,6 +107,36 @@ export default{
     border: 2px solid #22ade4;
     background-color: #fff;
     cursor: pointer;
+  }
+  .iclock-body:hover .iclock-mouse{
+    animation: smail 0.75s infinite;
+    -webkit-animation: smail 0.75s infinite;
+  }
+  @keyframes smail {
+    0% { transform: scale(1) }
+    10% { transform: scale(1.2) }
+    20% { transform: scale(1.1) }
+    30% { transform: scale(1.2) }
+    40% { transform: scale(1.1) }
+    50% { transform: scale(1.2) }
+    60% { transform: scale(1.1) }
+    70% { transform: scale(1.2) }
+    80% { transform: scale(1.1) }
+    90% { transform: scale(1.2) }
+    100% { transform: scale(0.9) }
+  }
+  @-webkit-keyframes smail {
+    0% { -webkit-transform: scale(1) }
+    10% { -webkit-transform: scale(1.2) }
+    20% { -webkit-transform: scale(1.1) }
+    30% { -webkit-transform: scale(1.2) }
+    40% { -webkit-transform: scale(1.1) }
+    50% { -webkit-transform: scale(1.2) }
+    60% { -webkit-transform: scale(1.1) }
+    70% { -webkit-transform: scale(1.2) }
+    80% { -webkit-transform: scale(1.1) }
+    90% { -webkit-transform: scale(1.2) }
+    100% { -webkit-transform: scale(0.9) }
   }
   .iclock-left-eyes, .iclock-right-eyes{
     position: absolute;
@@ -106,7 +161,7 @@ export default{
     height: 100%;
     overflow: hidden;
   }
-  .iclock-cup{
+  .iclock-right-box > .iclock-cup{
     position: absolute;
     top: 20px;
     right: 0;
@@ -116,11 +171,14 @@ export default{
     height: 60px;
   }
   .iclock-body > .iclock-mouse{
+    position: relative;
+    left: 20px;
+    top: 40px;
     width: 0;
     height: 0;
     border-left: 80px solid transparent;
     border-right: 80px solid transparent;
     border-top: 80px solid #ccc;
-    margin: 20% 10% 0 10%;
+    overflow: hidden;
   }
 </style>
