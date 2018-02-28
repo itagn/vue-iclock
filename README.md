@@ -5,7 +5,6 @@
   <a href="https://www.npmjs.com/package/vue-iclock.svg"><img src="https://img.shields.io/npm/l/vue-iclock.svg.svg" alt="License"></a>
 </p>
 
-[DEMO](https://github.com/itagn/vue-iclock)
 ## Introduction
 :rocket: a cute clock components with vuejs
 ## screenshot
@@ -61,7 +60,8 @@ export default {
 </style>
 ```
 ## Api
-- `display`
+- `display`  
+
 In order to judge display clock or text by setting display  
 
         Type: Object
