@@ -20,6 +20,7 @@
     },
     data (){
       return {
+        clock: null,
         dom: null,
         show: null,
         timer: null,
@@ -27,19 +28,26 @@
       }
     },
     created(){
+      this.scale = +this.display.scale || 1
       this.font = {
         type: this.display.type || 'clock',
         info: this.display.info || 'o w o',
         fontSize: this.display.fontSize || '1.5rem',
-        fontColor: this.display.fontColor || 'orange' || '#d4726f',
+        fontColor: this.display.fontColor || 'orange',
         fontStyle: this.display.fontStyle || "'Helvetica Neue',Helvetica,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',Arial,sans-serif"
       }
     },
     mounted() {
+      this.clock = document.querySelector(".iclock");
       this.dom = document.querySelector(".iclock .iclock-show");
+
+      this.clock.style.transform = `scale(${this.scale})`;
+      this.clock.style.webkitTransform = `scale(${this.scale})`;
+
       this.dom.style.color = this.font.fontColor;
       this.dom.style.fontSize = this.font.fontSize;
       this.dom.style.fontFamily = this.font.fontStyle;
+
       this.init();
     },
     methods: {
@@ -77,11 +85,6 @@
 <style>
   .iclock{
     width: 200px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
   }
   .iclock > .iclock-show{
     width: 97%;
@@ -93,11 +96,6 @@
     text-overflow:ellipsis;
     white-space: nowrap;
     cursor: pointer;
-    /*transform: rotateZ(12deg);*/
-    /*-webkit-transform: rotateZ(12deg);*/
-    /*-moz-transform: rotateZ(12deg);*/
-    /*-o-transform: rotateZ(12deg);*/
-    /*-ms-transform: rotateZ(12deg);*/
   }
   .iclock > .iclock-body{
     position: relative;

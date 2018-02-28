@@ -35,7 +35,7 @@ $ yarn add vue-iclock --save
 ## Usage
 ```javascript
 <template>
-    <iclock :display="clock"></iclock>
+    <iclock :display="clock" class="clock"></iclock>
 </template>
 <script>
 import { Iclock } from 'vue-iclock';
@@ -52,18 +52,34 @@ export default {
     }
 }
 </script>
+<style>
+.clock{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+</style>
 ```
-## api
+## Api
 - `display`
 In order to judge display clock or text by setting display  
 
         Type: Object
         Default: {
             type: 'clock',  //  value: 'clock' || 'text'
-            info: 'o w o',
-            fontColor: 'orange',
-            fontSize: '1.5rem'
+            info: 'o w o',  //  if this.type is 'text', and show this.info
+            scale: 1,  //  Magnification
+            fontColor: 'orange',  //  show font-color
+            fontSize: '1.5rem'  //  show font-size
         }
+
+## Contributing
+
+1. Fork it!
+1. Create your feature branch: git checkout -b my-new-feature
+1. Commit your changes: git commit -am 'Add some feature'
+1. Push to the branch: git push origin my-new-feature
+1. Submit a pull request :D
 
 ## License
 MIT © [itagn][3]
