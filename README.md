@@ -6,21 +6,23 @@
 </p>
 
 [DEMO](https://github.com/itagn/vue-iclock)
+## Introduction
+:rocket: a cute clock components with vuejs
 ## screenshot
-if you set display.type = 'clock'
+you can try to move the mouse to the smiling face.  
+
+    if you set display.type = 'clock'
 
 ![clock.png](https://github.com/itagn/vue-iclock/raw/master/img/clock.png)
 
-if you set display.type = 'text' && display.type = 'itagn' 
+    if you set display.type = 'text' && display.info = 'itagn' 
 
 ![text.png](https://github.com/itagn/vue-iclock/raw/master/img/text.png)
 
-if you set display.type is not 'clock' or 'text'
+    if you set display.type is not 'clock' or 'text'
 
 ![error.png](https://github.com/itagn/vue-iclock/raw/master/img/error.png)
 
-## Introduction
-:rocket: a cute clock components with vuejs
 ## Install
 ```text
 //  by npm
