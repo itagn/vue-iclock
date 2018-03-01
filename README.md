@@ -38,7 +38,7 @@ $ yarn add vue-iclock --save
 ## Usage
 ```javascript
 <template>
-    <iclock :display="clock" class="clock"></iclock>
+    <iclock :display="clock" id="clock"></iclock>
 </template>
 <script>
 import { Iclock } from 'vue-iclock';
@@ -50,7 +50,7 @@ export default {
         return {
             clock: {
                 type: 'clock',
-                className: 'clock',
+                className: '#clock',
                 smail: 'smail'
             }
         }
