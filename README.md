@@ -22,6 +22,10 @@ Try to move the mouse to the face.
 
 ![angry.png](https://github.com/itagn/vue-iclock/raw/master/img/angry.png)
 
+    let the cute clock wear glasses
+
+![glasses.png](https://github.com/itagn/vue-iclock/raw/master/img/glasses.png)
+
     if you set display is invalid
 
 ![error.png](https://github.com/itagn/vue-iclock/raw/master/img/error.png)
@@ -51,7 +55,8 @@ export default {
             clock: {
                 type: 'clock',
                 className: '#clock',
-                emoji: 'smail'
+                emoji: 'smile',
+                glasses: false
             }
         }
     }
@@ -76,7 +81,8 @@ In order to judge display clock or text by setting display
             info: 'o w o',  //  if this.type is 'text', and show this.info
             className: '',  //  set className when more than one iclock component on the page
             scale: 1,  //  Magnification
-            emoji: 'smail',  //  value: 'smail' || 'angry'
+            emoji: 'smile',  //  value: 'smile' || 'angry'
+            glasses: false,  //  Choose whether to wear glasses
             language: 'en',  //  language
             dateColor: '#999',  //  set date-color
             fontColor: 'orange',  //  set font-color

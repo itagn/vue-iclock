@@ -1,14 +1,19 @@
 <template>
   <div>
     <div class="iclock">
-    <span class="iclock-week" v-show="display.type==='clock'">
+    <span class="iclock-week" v-if="display.type==='clock'">
       <span v-if="language === 'zh'">星期</span>{{ week }}
     </span>
-      <span class="iclock-date" v-show="display.type==='clock'">{{ date }}</span>
+      <span class="iclock-date" v-if="display.type==='clock'">{{ date }}</span>
       <div class="iclock-show" :title="show">
         {{ show }}
       </div>
       <div class="iclock-body">
+        <div class="glasses" v-if="display.glasses">
+          <div class="glasses-left"></div>
+          <div class="glasses-mid"></div>
+          <div class="glasses-right"></div>
+        </div>
         <div class="iclock-left-eyes"></div>
         <div class="iclock-right-eyes"></div>
         <div class="iclock-right-box">
@@ -29,21 +34,23 @@
     data (){
       return {
         dom: null,
-        show: '',
+        show: null,
         timer: null,
         date: '',
         week: '',
         language: '',
         emoji: '',
         className: '',
+        glasses: null,
         font: {}
       }
     },
     created(){
       this.scale = +this.display.scale || 1;
       this.language = this.display.language || 'en';
-      this.emoji = this.display.emoji || 'smail';
+      this.emoji = this.display.emoji || 'smile';
       this.className = this.display.className || '';
+      this.glasses = this.display.glasses || false;
       this.font = {
         type: this.display.type || 'clock',
         info: this.display.info || 'o w o',
@@ -55,15 +62,10 @@
     },
     mounted() {
       var clock = document.querySelector(this.className + " .iclock");
-      var date = document.querySelector(this.className + " .iclock .iclock-date");
-      var week = document.querySelector(this.className + " .iclock .iclock-week");
       this.dom = document.querySelector(this.className + " .iclock .iclock-show");
 
       clock.style.transform = "scale("+this.scale+")";
       clock.style.webkitTransform = "scale("+this.scale+")";
-
-      date.style.color = this.font.dateColor;
-      week.style.color = this.font.dateColor;
 
       this.dom.style.color = this.font.fontColor;
       this.dom.style.fontSize = this.font.fontSize;
@@ -74,6 +76,11 @@
     methods: {
       init(){
         if(this.font.type === 'clock'){
+          var date = document.querySelector(this.className + " .iclock .iclock-date");
+          var week = document.querySelector(this.className + " .iclock .iclock-week");
+          date.style.color = this.font.dateColor;
+          week.style.color = this.font.dateColor;
+
           this.week = this.getDate().week;
           this.date = this.getDate().date;
           this.show = this.getDate().time;
@@ -84,7 +91,7 @@
           this.errTip('Error: props[display].type should be "clock" or "text".');
         }
         var mouse = document.querySelector(this.className + " .iclock .iclock-body .iclock-mouse");
-        if(this.emoji === 'smail'){
+        if(this.emoji === 'smile'){
           mouse.style.borderTop = '80px solid #ccc';
           mouse.style.borderLeft = '80px solid transparent';
           mouse.style.borderRight = '80px solid transparent';
@@ -92,7 +99,7 @@
           mouse.style.border = '40px solid #d53a35';
           mouse.style.borderRadius = '10%';
         } else {
-          this.errTip('Error: props[display].emoji should be "smail" or "angry".');
+          this.errTip('Error: props[display].emoji should be "smile" or "angry".');
         }
       },
       errTip(str){
@@ -175,34 +182,39 @@
     cursor: pointer;
   }
   .iclock-body:hover .iclock-mouse{
-    animation: smail 0.75s infinite;
-    -webkit-animation: smail 0.75s infinite;
+    animation: ppp 0.75s infinite;
+    -webkit-animation: ppp 0.75s infinite;
   }
-  @keyframes smail {
-    0% { transform: scale(1) }
-    10% { transform: scale(1.2) }
-    20% { transform: scale(1.1) }
-    30% { transform: scale(1.2) }
-    40% { transform: scale(1.1) }
-    50% { transform: scale(1.2) }
-    60% { transform: scale(1.1) }
-    70% { transform: scale(1.2) }
-    80% { transform: scale(1.1) }
-    90% { transform: scale(1.2) }
-    100% { transform: scale(0.9) }
+  .iclock-body .glasses{
+    position: absolute;
+    top: -8px;
+    left: 8px;
+    z-index: 2;
   }
-  @-webkit-keyframes smail {
-    0% { -webkit-transform: scale(1) }
-    10% { -webkit-transform: scale(1.2) }
-    20% { -webkit-transform: scale(1.1) }
-    30% { -webkit-transform: scale(1.2) }
-    40% { -webkit-transform: scale(1.1) }
-    50% { -webkit-transform: scale(1.2) }
-    60% { -webkit-transform: scale(1.1) }
-    70% { -webkit-transform: scale(1.2) }
-    80% { -webkit-transform: scale(1.1) }
-    90% { -webkit-transform: scale(1.2) }
-    100% { -webkit-transform: scale(0.9) }
+  .glasses-left, .glasses-right{
+    position: absolute;
+    top: 0;
+    width: 70px;
+    height: 30px;
+    border: 3px solid #000;
+    border-radius: 10%;
+    display: inline-block;
+    background-color: transparent;
+  }
+  .glasses > .glasses-mid{
+    position: absolute;
+    top: 30px;
+    left: 60px;
+    width: 40px;
+    height: 3px;
+    background-color: #000;
+    display: inline-block;
+  }
+  .glasses > .glasses-left{
+    left: 0;
+  }
+  .glasses >.glasses-right{
+    left: 90px;
   }
   .iclock-left-eyes, .iclock-right-eyes{
     position: absolute;
@@ -243,5 +255,31 @@
     width: 0;
     height: 0;
     overflow: hidden;
+  }
+  @keyframes ppp {
+    0% { transform: scale(1) }
+    10% { transform: scale(1.2) }
+    20% { transform: scale(1.1) }
+    30% { transform: scale(1.2) }
+    40% { transform: scale(1.1) }
+    50% { transform: scale(1.2) }
+    60% { transform: scale(1.1) }
+    70% { transform: scale(1.2) }
+    80% { transform: scale(1.1) }
+    90% { transform: scale(1.2) }
+    100% { transform: scale(0.9) }
+  }
+  @-webkit-keyframes ppp {
+    0% { -webkit-transform: scale(1) }
+    10% { -webkit-transform: scale(1.2) }
+    20% { -webkit-transform: scale(1.1) }
+    30% { -webkit-transform: scale(1.2) }
+    40% { -webkit-transform: scale(1.1) }
+    50% { -webkit-transform: scale(1.2) }
+    60% { -webkit-transform: scale(1.1) }
+    70% { -webkit-transform: scale(1.2) }
+    80% { -webkit-transform: scale(1.1) }
+    90% { -webkit-transform: scale(1.2) }
+    100% { -webkit-transform: scale(0.9) }
   }
 </style>
