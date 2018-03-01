@@ -22,7 +22,7 @@ Try to move the mouse to the face.
 
 ![angry.png](https://github.com/itagn/vue-iclock/raw/master/img/angry.png)
 
-    let the cute clock wear glasses
+    let the cute clock wear glasses, and set display.glasses = true
 
 ![glasses.png](https://github.com/itagn/vue-iclock/raw/master/img/glasses.png)
 
