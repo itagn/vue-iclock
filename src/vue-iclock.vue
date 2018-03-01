@@ -35,6 +35,7 @@
         week: '',
         language: '',
         emoji: '',
+        className: '',
         font: {}
       }
     },
@@ -42,6 +43,7 @@
       this.scale = +this.display.scale || 1;
       this.language = this.display.language || 'en';
       this.emoji = this.display.emoji || 'smail';
+      this.className = this.display.className || '';
       this.font = {
         type: this.display.type || 'clock',
         info: this.display.info || 'o w o',
@@ -52,13 +54,13 @@
       }
     },
     mounted() {
-      var clock = document.querySelector(".iclock");
-      var date = document.querySelector(".iclock .iclock-date");
-      var week = document.querySelector(".iclock .iclock-week");
-      this.dom = document.querySelector(".iclock .iclock-show");
+      var clock = document.querySelector(this.className + " .iclock");
+      var date = document.querySelector(this.className + " .iclock .iclock-date");
+      var week = document.querySelector(this.className + " .iclock .iclock-week");
+      this.dom = document.querySelector(this.className + " .iclock .iclock-show");
 
-      clock.style.transform = `scale(${this.scale})`;
-      clock.style.webkitTransform = `scale(${this.scale})`;
+      clock.style.transform = "scale("+this.scale+")";
+      clock.style.webkitTransform = "scale("+this.scale+")";
 
       date.style.color = this.font.dateColor;
       week.style.color = this.font.dateColor;
@@ -81,7 +83,7 @@
         } else {
           this.errTip('Error: props[display].type should be "clock" or "text".');
         }
-        var mouse = document.querySelector('.iclock .iclock-body .iclock-mouse');
+        var mouse = document.querySelector(this.className + " .iclock .iclock-body .iclock-mouse");
         if(this.emoji === 'smail'){
           mouse.style.borderTop = '80px solid #ccc';
           mouse.style.borderLeft = '80px solid transparent';

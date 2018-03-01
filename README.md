@@ -50,6 +50,7 @@ export default {
         return {
             clock: {
                 type: 'clock',
+                className: 'clock',
                 smail: 'smail'
             }
         }
@@ -73,6 +74,7 @@ In order to judge display clock or text by setting display
         Default: {
             type: 'clock',  //  value: 'clock' || 'text'
             info: 'o w o',  //  if this.type is 'text', and show this.info
+            className: '',  //  set className when more than one iclock component on the page
             scale: 1,  //  Magnification
             emoji: 'smail',  //  value: 'smail' || 'angry'
             language: 'en',  //  language
