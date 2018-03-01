@@ -98,6 +98,16 @@
         } else if (this.emoji === 'angry'){
           mouse.style.border = '40px solid #d53a35';
           mouse.style.borderRadius = '10%';
+        } else if (this.emoji === 'jiong'){
+          var leftEye = document.querySelector(this.className + " .iclock .iclock-body .iclock-left-eyes");
+          var rightEye = document.querySelector(this.className + " .iclock .iclock-body .iclock-right-eyes");
+          leftEye.style.transform = 'rotate(-10deg)';
+          rightEye.style.transform = 'rotate(10deg)';
+
+          mouse.style.border = '40px solid #e98f6f';
+          mouse.style.borderRadius = '10%';
+          mouse.style.left = '56px';
+          mouse.style.width = '10px';
         } else {
           this.errTip('Error: props[display].emoji should be "smile" or "angry".');
         }

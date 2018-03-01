@@ -18,9 +18,9 @@ Try to move the mouse to the face.
 
 ![text.png](https://github.com/itagn/vue-iclock/raw/master/img/text.png)
 
-    if you want to change the expression, and set display.emoji = 'angry'
+    if you want to change the expression, and set display.emoji = 'angry' or 'jiong'
 
-![angry.png](https://github.com/itagn/vue-iclock/raw/master/img/angry.png)
+![angry.png](https://github.com/itagn/vue-iclock/raw/master/img/angry.png) ![jiong.png](https://github.com/itagn/vue-iclock/raw/master/img/jiong.png)
 
     let the cute clock wear glasses, and set display.glasses = true
 
@@ -75,20 +75,20 @@ export default {
 
 In order to judge display clock or text by setting display  
 
-        Type: Object
-        Default: {
-            type: 'clock',  //  value: 'clock' || 'text'
-            info: 'o w o',  //  if this.type is 'text', and show this.info
-            className: '',  //  set className when more than one iclock component on the page
-            scale: 1,  //  Magnification
-            emoji: 'smile',  //  value: 'smile' || 'angry'
-            glasses: false,  //  Choose whether to wear glasses
-            language: 'en',  //  language
-            dateColor: '#999',  //  set date-color
-            fontColor: 'orange',  //  set font-color
-            fontSize: '1.5rem',  //  set font-size
-            fontStyle: 'Helvetica,"Microsoft YaHei"' // set font-family
-        }
+    Type: Object
+    Default: {
+        type: 'clock',  //  value: 'clock' || 'text'
+        info: 'o w o',  //  if this.type is 'text', and show this.info
+        className: '',  //  set className when more than one iclock component on the page
+        scale: 1,  //  Magnification
+        emoji: 'smile',  //  value: 'smile' || 'angry' || 'jiong'
+        glasses: false,  //  Choose whether to wear glasses
+        language: 'en',  //  language
+        dateColor: '#999',  //  set date-color
+        fontColor: 'orange',  //  set font-color
+        fontSize: '1.5rem',  //  set font-size
+        fontStyle: 'Helvetica,"Microsoft YaHei"' // set font-family
+    }
 
 ## Contributing
 
@@ -100,7 +100,7 @@ In order to judge display clock or text by setting display
 
 ## License
 MIT © [itagn][1]  
-作者: 微博 [@itagn][2] - Github [@itagn][3] 
+作者：微博 [@itagn][2] - Github [@itagn][3] 
 
 [1]: https://www.npmjs.com/~itagn
 [2]: https://weibo.com/p/1005053782707172
