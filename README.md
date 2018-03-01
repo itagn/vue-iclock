@@ -8,7 +8,7 @@
 ## Introduction
 :rocket: a cute clock components with vuejs
 ## screenshot
-you can try to move the mouse to the smiling face.  
+Try to move the mouse to the face.  
 
     if you set display.type = 'clock' && set display.language = 'zh' or 'en'
 
@@ -91,9 +91,9 @@ In order to judge display clock or text by setting display
 1. Submit a pull request :D
 
 ## License
-MIT © [itagn][3]  
-作者：微博 [@itagn][1] - Github [@itagn][2] 
+MIT © [itagn][1]  
+作者：微博 [@itagn][2] - Github [@itagn][3] 
 
-[1]: https://weibo.com/p/1005053782707172
-[2]: https://github.com/itagn
-[3]: https://www.npmjs.com/~itagn
+[1]: https://www.npmjs.com/~itagn
+[2]: https://weibo.com/p/1005053782707172
+[3]: https://github.com/itagn
