@@ -51,14 +51,14 @@ export default {
             clock: {
                 type: 'clock',
                 className: '#clock',
-                smail: 'smail'
+                emoji: 'smail'
             }
         }
     }
 }
 </script>
 <style>
-.clock{
+#clock{
     position: absolute;
     top: 0;
     left: 0;
