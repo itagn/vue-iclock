@@ -1,19 +1,21 @@
 <template>
-  <div class="iclock">
-    <span class="iclock-week" v-show="display.type==='clock'">
-      <span v-if="language === 'zh'">星期</span>{{ week }}
-    </span>
-    <span class="iclock-date" v-show="display.type==='clock'">{{ date }}</span>
-    <div class="iclock-show" :title="show">
-      {{ show }}
-    </div>
-    <div class="iclock-body">
-      <div class="iclock-left-eyes"></div>
-      <div class="iclock-right-eyes"></div>
-      <div class="iclock-right-box">
-        <div class="iclock-cup"></div>
+  <div>
+    <div class="iclock">
+      <span class="iclock-week" v-show="display.type==='clock'">
+        <span v-if="language === 'zh'">星期</span>{{ week }}
+      </span>
+      <span class="iclock-date" v-show="display.type==='clock'">{{ date }}</span>
+      <div class="iclock-show" :title="show">
+        {{ show }}
       </div>
-      <div class="iclock-mouse"></div>
+      <div class="iclock-body">
+        <div class="iclock-left-eyes"></div>
+        <div class="iclock-right-eyes"></div>
+        <div class="iclock-right-box">
+          <div class="iclock-cup"></div>
+        </div>
+        <div class="iclock-mouse"></div>
+      </div>
     </div>
   </div>
 </template>
