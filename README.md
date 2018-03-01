@@ -100,7 +100,7 @@ In order to judge display clock or text by setting display
 
 ## License
 MIT © [itagn][1]  
-作者：微博 [@itagn][2] - Github [@itagn][3] 
+作者: 微博 [@itagn][2] - Github [@itagn][3] 
 
 [1]: https://www.npmjs.com/~itagn
 [2]: https://weibo.com/p/1005053782707172

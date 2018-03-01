@@ -102,7 +102,9 @@
           var leftEye = document.querySelector(this.className + " .iclock .iclock-body .iclock-left-eyes");
           var rightEye = document.querySelector(this.className + " .iclock .iclock-body .iclock-right-eyes");
           leftEye.style.transform = 'rotate(-10deg)';
+          leftEye.style.webkitTransform = 'rotate(-10deg)';
           rightEye.style.transform = 'rotate(10deg)';
+          rightEye.style.webkitTransform = 'rotate(10deg)';
 
           mouse.style.border = '40px solid #e98f6f';
           mouse.style.borderRadius = '10%';
@@ -236,10 +238,12 @@
   .iclock-body > .iclock-left-eyes{
     left: 20px;
     transform: rotate(10deg);
+    -webkit-transform: rotate(10deg);
   }
   .iclock-body > .iclock-right-eyes{
     right: 20px;
     transform: rotate(-10deg);
+    -webkit-transform: rotate(-10deg);
   }
   .iclock-body > .iclock-right-box{
     position: absolute;
