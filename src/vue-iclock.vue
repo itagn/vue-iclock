@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="iclock">
-      <span class="iclock-week" v-show="display.type==='clock'">
-        <span v-if="language === 'zh'">星期</span>{{ week }}
-      </span>
+    <span class="iclock-week" v-show="display.type==='clock'">
+      <span v-if="language === 'zh'">星期</span>{{ week }}
+    </span>
       <span class="iclock-date" v-show="display.type==='clock'">{{ date }}</span>
       <div class="iclock-show" :title="show">
         {{ show }}
@@ -34,12 +34,14 @@
         date: '',
         week: '',
         language: '',
+        emoji: '',
         font: {}
       }
     },
     created(){
       this.scale = +this.display.scale || 1;
       this.language = this.display.language || 'en';
+      this.emoji = this.display.emoji || 'smail';
       this.font = {
         type: this.display.type || 'clock',
         info: this.display.info || 'o w o',
@@ -77,10 +79,24 @@
         } else if(this.font.type === 'text'){
           this.show = this.font.info;
         } else {
-          this.dom.style.color = '#c23531';
-          this.show = "Error~";
-          console.error('Error: props[display].type should be "clock" or "text".');
+          this.errTip('Error: props[display].type should be "clock" or "text".');
         }
+        var mouse = document.querySelector('.iclock .iclock-body .iclock-mouse');
+        if(this.emoji === 'smail'){
+          mouse.style.borderTop = '80px solid #ccc';
+          mouse.style.borderLeft = '80px solid transparent';
+          mouse.style.borderRight = '80px solid transparent';
+        } else if (this.emoji === 'angry'){
+          mouse.style.border = '40px solid #d53a35';
+          mouse.style.borderRadius = '10%';
+        } else {
+          this.errTip('Error: props[display].emoji should be "smail" or "angry".');
+        }
+      },
+      errTip(str){
+        this.dom.style.color = '#c23531';
+        this.show = "Error~";
+        console.error(str);
       },
       loop(){
         var _this = this;
@@ -224,9 +240,6 @@
     top: 40px;
     width: 0;
     height: 0;
-    border-left: 80px solid transparent;
-    border-right: 80px solid transparent;
-    border-top: 80px solid #ccc;
     overflow: hidden;
   }
 </style>

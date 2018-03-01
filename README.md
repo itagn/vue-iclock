@@ -18,7 +18,11 @@ you can try to move the mouse to the smiling face.
 
 ![text.png](https://github.com/itagn/vue-iclock/raw/master/img/text.png)
 
-    if you set display.type is not 'clock' or 'text'
+    if you want to change the expression, and set display.emoji = 'angry'
+
+![angry.png](https://github.com/itagn/vue-iclock/raw/master/img/angry.png)
+
+    if you set display is invalid
 
 ![error.png](https://github.com/itagn/vue-iclock/raw/master/img/error.png)
 
@@ -45,7 +49,8 @@ export default {
     data() {
         return {
             clock: {
-                type: 'clock'
+                type: 'clock',
+                smail: 'smail'
             }
         }
     }
@@ -69,6 +74,7 @@ In order to judge display clock or text by setting display
             type: 'clock',  //  value: 'clock' || 'text'
             info: 'o w o',  //  if this.type is 'text', and show this.info
             scale: 1,  //  Magnification
+            emoji: 'smail',  //  value: 'smail' || 'angry'
             language: 'en',  //  language
             dateColor: '#999',  //  set date-color
             fontColor: 'orange',  //  set font-color
@@ -85,7 +91,7 @@ In order to judge display clock or text by setting display
 1. Submit a pull request :D
 
 ## License
-MIT © [itagn][3]
+MIT © [itagn][3]  
 作者：微博 [@itagn][1] - Github [@itagn][2] 
 
 [1]: https://weibo.com/p/1005053782707172
