@@ -29,7 +29,7 @@
     data (){
       return {
         dom: null,
-        show: null,
+        show: '',
         timer: null,
         date: '',
         week: '',
