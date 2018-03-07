@@ -1,15 +1,17 @@
 <template>
   <div>
     <div class="iclock">
-    <span class="iclock-week" v-if="display.type==='clock'">
-      <span v-if="language === 'zh'">星期</span>{{ week }}
-    </span>
-      <span class="iclock-date" v-if="display.type==='clock'">{{ date }}</span>
+      <div class="iclock-time" v-if="type==='clock'">
+        <span class="iclock-week">
+          {{ week }}
+        </span>
+        <span class="iclock-date">{{ date }}</span>
+      </div>
       <div class="iclock-show" :title="show">
         {{ show }}
       </div>
       <div class="iclock-body">
-        <div class="glasses" v-if="display.glasses">
+        <div class="glasses" v-if="glasses">
           <div class="glasses-left"></div>
           <div class="glasses-mid"></div>
           <div class="glasses-right"></div>
@@ -33,16 +35,20 @@
     },
     data (){
       return {
-        dom: null,
-        show: null,
-        timer: null,
+        show: '',
         date: '',
         week: '',
-        language: '',
-        emoji: '',
-        className: '',
-        glasses: null,
-        font: {}
+        language: this.display.language || 'en',
+        emoji: this.display.emoji || 'smile',
+        className: this.display.className || '',
+        glasses: this.display.glasses || false,
+        scale: +this.display.scale || 1,
+        type: this.display.type || 'clock',
+        info: this.display.info || 'o w o',
+        fontSize: this.display.fontSize || '1.5rem',
+        fontColor: this.display.fontColor || 'orange',
+        fontStyle: this.display.fontStyle || "Helvetica,'Microsoft YaHei'",
+        dateColor: this.display.dateColor || '#999'
       }
     },
     created(){
@@ -53,46 +59,38 @@
     },
     methods: {
       initData(){
-        this.scale = +this.display.scale || 1;
-        this.language = this.display.language || 'en';
-        this.emoji = this.display.emoji || 'smile';
-        this.className = this.display.className || '';
-        this.glasses = this.display.glasses || false;
-        this.font = {
-          type: this.display.type || 'clock',
-          info: this.display.info || 'o w o',
-          fontSize: this.display.fontSize || '1.5rem',
-          fontColor: this.display.fontColor || 'orange',
-          fontStyle: this.display.fontStyle || "Helvetica,'Microsoft YaHei'",
-          dateColor: this.display.dateColor || '#999'
-        }
+        this.week = this.getDate().week;
+        this.date = this.getDate().date;
+        this.show = this.getDate().time;
       },
       init(){
-        this.initStyle();
-        this.checkType();
-        this.checkEmoji();
+        var clock = document.querySelector(this.className + " .iclock");
+        if(clock){
+          this.initStyle();
+          this.checkType();
+          this.checkEmoji();
+        } else {
+          this.errTip('Error: props[display].className of dom does not exist!')
+        }
       },
       initStyle(){
         var clock = document.querySelector(this.className + " .iclock");
-        this.dom = document.querySelector(this.className + " .iclock .iclock-show");
         clock.style.transform = "scale("+this.scale+")";
         clock.style.webkitTransform = "scale("+this.scale+")";
-        this.dom.style.color = this.font.fontColor;
-        this.dom.style.fontSize = this.font.fontSize;
-        this.dom.style.fontFamily = this.font.fontStyle;
+        clock.style.fontFamily = this.fontStyle;
+        var dom = document.querySelector(this.className + " .iclock .iclock-show");
+        dom.style.color = this.fontColor;
+        dom.style.fontSize = this.fontSize;
       },
       checkType(){
-        if(this.font.type === 'clock'){
+        if(this.type === 'clock'){
           var date = document.querySelector(this.className + " .iclock .iclock-date");
           var week = document.querySelector(this.className + " .iclock .iclock-week");
-          date.style.color = this.font.dateColor;
-          week.style.color = this.font.dateColor;
-          this.week = this.getDate().week;
-          this.date = this.getDate().date;
-          this.show = this.getDate().time;
+          date.style.color = this.dateColor;
+          week.style.color = this.dateColor;
           this.loop();
-        } else if(this.font.type === 'text'){
-          this.show = this.font.info;
+        } else if(this.type === 'text'){
+          this.show = this.info;
         } else {
           this.errTip('Error: props[display].type should be "clock" or "text".');
         }
@@ -106,17 +104,19 @@
         } else if (this.emoji === 'jiong'){
           this.jiong(mouse);
         } else {
-          this.errTip('Error: props[display].emoji should be "smile" or "angry".');
+          this.errTip('Error: props[display].emoji should be "smile", "angry" or "jiong".');
         }
       },
       errTip(str){
-        this.dom.style.color = '#c23531';
-        this.show = "Error~";
+        var dom = document.querySelector(".iclock .iclock-show");
+        dom.style.color = '#c23531';
+        dom.style.fontSize = this.fontSize;
+        dom.style.fontFamily = this.fontStyle;
         console.error(str);
       },
       loop(){
         var _this = this;
-        this.timer = setInterval(function () {
+        setInterval(function () {
           _this.show = _this.getDate().time;
         }, 1000);
       },
@@ -135,7 +135,7 @@
         var date;
         var week = dates.getDay();
         if(this.language === 'zh') {
-          var zh = ['日', '一', '二', '三', '四', '五', '六'];
+          var zh = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
           week = zh[week % 7];
           date = y+'/'+m+'/'+d;
         } else {
@@ -171,6 +171,8 @@
 </script>
 <style>
   .iclock{
+    position: relative;
+    display: inline-block;
     width: 200px;
   }
   .iclock > .iclock-show{
@@ -185,17 +187,17 @@
     white-space: nowrap;
     cursor: pointer;
   }
-  .iclock > .iclock-date, .iclock-week{
+  .iclock-time > .iclock-date, .iclock-week{
     position: absolute;
     top: -14px;
     font-size: 14px;
     user-select: all;
     cursor: pointer;
   }
-  .iclock > .iclock-date{
+  .iclock-time > .iclock-date{
     right: 0;
   }
-  .iclock > .iclock-week{
+  .iclock-time > .iclock-week{
     left: 0;
   }
   .iclock > .iclock-body{
