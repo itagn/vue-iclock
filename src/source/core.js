@@ -83,13 +83,13 @@ export default{
     },
     checkType(){
       if(this.type === 'clock'){
-          const date = document.querySelector(`${this.className} .iclock .iclock-date`);
-          const week = document.querySelector(`${this.className} .iclock .iclock-week`);
-          date.style.color = this.dateColor;
-          week.style.color = this.dateColor;
-          this.loop();
+        const date = document.querySelector(`${this.className} .iclock .iclock-date`);
+        const week = document.querySelector(`${this.className} .iclock .iclock-week`);
+        date.style.color = this.dateColor;
+        week.style.color = this.dateColor;
+        this.loop();
       } else if(this.type === 'text'){
-          this.show = this.info;
+        this.show = this.info;
       }
     },
     checkEmoji(){
@@ -122,10 +122,15 @@ export default{
       if (this.mode === 'scroll'){
         const dom = document.querySelector(".iclock .iclock-info");
         dom.style.display = 'none';
+        this.interval = setInterval(() => {
+          this.getTime();
+        }, 1000);
+      } else if (this.mode === 'default'){
+        this.interval = setInterval(() => {
+          this.show = this.getTime();
+        }, 1000);
       }
-      this.interval = setInterval(() => {
-        this.getTime();
-      }, 1000);
+
     },
     getTime(){
       const dates = new Date();
