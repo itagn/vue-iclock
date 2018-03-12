@@ -1,4 +1,4 @@
-import time from '../time.png';
+import time from './time.png';
 export default{
   props: {
     display: {

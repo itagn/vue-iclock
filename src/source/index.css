@@ -9,7 +9,7 @@
   height: 50px;
   line-height: 50px;
   text-align: center;
-  user-select: all;
+  user-select: none;
   text-overflow:ellipsis;
   white-space: nowrap;
   cursor: pointer;
