@@ -19,7 +19,6 @@ export default{
       date: '',
       week: '',
       type: this.display.type || 'clock',
-      mode: this.display.mode || 'default',
       language: this.display.language === 'en' ? 'en' : 'zh',
       emoji: this.display.emoji || 'smile',
       className: this.display.className || '',
@@ -33,16 +32,16 @@ export default{
     }
   },
   created(){
-    this.initData();
+    this.initDate();
+    this.show = this.getTime();
   },
   mounted() {
     this.init();
   },
   methods: {
-    initData(){
+    initDate(){
       this.week = this.getDate().week;
       this.date = this.getDate().date;
-      this.show = this.getTime();
     },
     init(){
       const clock = document.querySelector(`${this.className} .iclock`);
@@ -58,12 +57,8 @@ export default{
     },
     checkError(){
       let tf = true;
-      if(this.type !== 'clock' && this.type !== 'text'){
-        this.errTip('Error: props[display].type should be "clock" or "text".');
-        tf = false;
-      }
-      if(this.mode !== 'default' && this.mode !== 'scroll'){
-        this.errTip('Error: props[display].type should be "default" or "scroll".');
+      if(this.type !== 'clock' && this.type !== 'text' && this.type!== 'scroll'){
+        this.errTip('Error: props[display].type should be "clock", "text" or "scroll".');
         tf = false;
       }
       if(this.emoji !== 'smile' && this.emoji !== 'angry' && this.emoji !== 'jiong'){
@@ -82,7 +77,7 @@ export default{
       dom.style.fontSize = this.fontSize;
     },
     checkType(){
-      if(this.type === 'clock'){
+      if(this.type === 'clock' || this.type === 'scroll'){
         const date = document.querySelector(`${this.className} .iclock .iclock-date`);
         const week = document.querySelector(`${this.className} .iclock .iclock-week`);
         date.style.color = this.dateColor;
@@ -110,7 +105,7 @@ export default{
       dom.style.color = '#c23531';
       dom.style.fontSize = this.fontSize;
       dom.style.fontFamily = this.fontStyle;
-      if(this.type === 'clock' && this.mode === 'scroll'){
+      if(this.type === 'scroll'){
         dom.style.display = 'block';
         const scroll = document.querySelector(".iclock .iclock-scroll");
         scroll.style.display = 'none';
@@ -119,14 +114,16 @@ export default{
       console.error(str);
     },
     loop(){
-      if (this.mode === 'scroll'){
+      if (this.type === 'scroll'){
         const dom = document.querySelector(".iclock .iclock-info");
         dom.style.display = 'none';
         this.interval = setInterval(() => {
+          this.initDate();
           this.getTime();
         }, 1000);
-      } else if (this.mode === 'default'){
+      } else if (this.type === 'clock'){
         this.interval = setInterval(() => {
+          this.initDate();
           this.show = this.getTime();
         }, 1000);
       }
@@ -141,9 +138,9 @@ export default{
       let s = dates.getSeconds()+'';
       s = s.length === 2 ? s : `0${s}`;
 
-      if(this.mode === 'default'){
+      if(this.type === 'clock'){
         return `${h}:${m}:${s}`;
-      } else if(this.mode === 'scroll') {
+      } else if(this.type === 'scroll') {
         [this.hf, this.hs] = [`num num${h[0]}`, `num num${h[1]}`];
         [this.mf, this.ms] = [`num num${m[0]}`, `num num${m[1]}`];
         [this.sf, this.ss] = [`num num${s[0]}`, `num num${s[1]}`];

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="iclock">
-      <div class="iclock-time" v-if="type==='clock'">
+      <div class="iclock-time" v-if="type==='clock' || type ==='scroll'">
         <span class="iclock-week">
           {{ week }}
         </span>
@@ -11,15 +11,15 @@
         <div class="iclock-info" >
           {{ show }}
         </div>
-        <div v-if=" type==='clock' && mode==='scroll' " class="iclock-scroll">
-          <img :src="scrollUrl" alt="hours-first" :class="hf">
-          <img :src="scrollUrl" alt="hours-second" :class="hs">
+        <div v-if=" type === 'scroll' " class="iclock-scroll">
+          <img :src="scrollUrl" alt="hours-first" :class="hf" />
+          <img :src="scrollUrl" alt="hours-second" :class="hs" />
           <span> * </span>
-          <img :src="scrollUrl" alt="minutes-first" :class="mf">
-          <img :src="scrollUrl" alt="minutes-second" :class="ms">
+          <img :src="scrollUrl" alt="minutes-first" :class="mf" />
+          <img :src="scrollUrl" alt="minutes-second" :class="ms" />
           <span> * </span>
-          <img :src="scrollUrl" alt="seconds-first" :class="sf">
-          <img :src="scrollUrl" alt="seconds-second" :class="ss">
+          <img :src="scrollUrl" alt="seconds-first" :class="sf" />
+          <img :src="scrollUrl" alt="seconds-second" :class="ss" />
         </div>
       </div>
       <div class="iclock-body">
