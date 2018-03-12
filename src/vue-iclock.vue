@@ -14,10 +14,10 @@
         <div v-if=" type === 'scroll' " class="iclock-scroll">
           <img :src="scrollUrl" alt="hours-first" :class="hf" />
           <img :src="scrollUrl" alt="hours-second" :class="hs" />
-          <span> * </span>
+          <span>:</span>
           <img :src="scrollUrl" alt="minutes-first" :class="mf" />
           <img :src="scrollUrl" alt="minutes-second" :class="ms" />
-          <span> * </span>
+          <span>:</span>
           <img :src="scrollUrl" alt="seconds-first" :class="sf" />
           <img :src="scrollUrl" alt="seconds-second" :class="ss" />
         </div>

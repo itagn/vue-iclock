@@ -10,7 +10,6 @@
   line-height: 50px;
   text-align: center;
   user-select: all;
-  /*overflow: hidden;*/
   text-overflow:ellipsis;
   white-space: nowrap;
   cursor: pointer;
