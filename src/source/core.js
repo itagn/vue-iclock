@@ -254,7 +254,6 @@ export default{
         width: '50%',
         height: '5px'
       }, mouseDom);
-      // const bodyDom = document.querySelector(`${this.className} .iclock .iclock-body`);
     }
   }
 }

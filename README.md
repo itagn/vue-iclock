@@ -88,7 +88,7 @@ In order to judge display clock or text by setting display
         scale: 1,  //  Magnification
         emoji: 'smile',  //  value: 'smile' || 'angry' || 'jiong'
         glasses: false,  //  Choose whether to wear glasses
-        hoverAnimation: fasle,  //  Choose whether to openanimation of clock
+        hoverAnimation: fasle,  //  Choose whether to open animation of clock
         language: 'en',  //  language
         dateColor: '#999',  //  set date-color
         fontColor: 'orange',  //  set font-color
