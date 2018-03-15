@@ -25,6 +25,7 @@ export default{
       glasses: this.display.glasses ? true : false,
       scale: +this.display.scale || 1,
       info: this.display.info || 'o w o',
+      hoverAnimation: this.display.hoverAnimation ? true : false,
       fontSize: this.display.fontSize || '1.5rem',
       fontColor: this.display.fontColor || 'orange',
       fontStyle: this.display.fontStyle || "Helvetica,'Microsoft YaHei'",
@@ -44,8 +45,8 @@ export default{
       this.date = this.getDate().date;
     },
     init(){
-      const clock = document.querySelector(`${this.className} .iclock`);
-      if(clock){
+      const clockDom = document.querySelector(`${this.className} .iclock`);
+      if(clockDom){
         if(this.checkError()){
           this.initStyle();
           this.checkType();
@@ -61,62 +62,92 @@ export default{
         this.errTip('Error: props[display].type should be "clock", "text" or "scroll".');
         tf = false;
       }
-      if(this.emoji !== 'smile' && this.emoji !== 'angry' && this.emoji !== 'jiong'){
-        this.errTip('Error: props[display].emoji should be "smile", "angry" or "jiong".');
+      if(this.emoji !== 'smile' && this.emoji !== 'angry' && this.emoji !== 'jiong' && this.emoji !== 'owo'){
+        this.errTip('Error: props[display].emoji should be "smile", "angry", "jiong" or "owo".');
         tf = false;
       }
       return tf;
     },
     initStyle(){
-      const clock = document.querySelector(`${this.className} .iclock`);
-      clock.style.transform = `scale(${this.scale})`;
-      clock.style.webkitTransform = `scale(${this.scale})`;
-      clock.style.fontFamily = this.fontStyle;
-      const dom = document.querySelector(`${this.className} .iclock .iclock-show`);
-      dom.style.color = this.fontColor;
-      dom.style.fontSize = this.fontSize;
+      const that = this;
+      const clockDom = document.querySelector(`${this.className} .iclock`);
+      this.objVal({
+        transform: `scale(${this.scale})`,
+        webkitTransform: `scale(${this.scale})`,
+        fontFamily: that.fontStyle
+      }, clockDom);
+      const showDom = document.querySelector(`${this.className} .iclock .iclock-show`);
+      this.objVal({
+        color:　that.fontColor,
+        fontSize: that.fontSize
+      }, showDom);
+      this.checkAnimation();
+    },
+    checkAnimation(){
+      const that = this;
+      if(this.hoverAnimation){
+        const bodyDom = document.querySelector(`${this.className} .iclock .iclock-body`);
+        const mouseDom = document.querySelector(`${this.className} .iclock .iclock-mouse`);
+        let animationName = 'ppp', animationTime = '0.75s';
+        this.domHover(bodyDom, function () {
+          that.objVal({
+            animation: `${animationName} ${animationTime} infinite`,
+            webkitAnimation: `${animationName} ${animationTime} infinite`
+          }, mouseDom);
+        }, function () {
+          that.objVal({
+            animation: ``,
+            webkitAnimation: ``
+          }, mouseDom);
+        })
+      }
     },
     checkType(){
       if(this.type === 'clock' || this.type === 'scroll'){
-        const date = document.querySelector(`${this.className} .iclock .iclock-date`);
-        const week = document.querySelector(`${this.className} .iclock .iclock-week`);
-        date.style.color = this.dateColor;
-        week.style.color = this.dateColor;
+        const dateDom = document.querySelector(`${this.className} .iclock .iclock-date`);
+        const weekDom = document.querySelector(`${this.className} .iclock .iclock-week`);
+        dateDom.style.color = this.dateColor;
+        weekDom.style.color = this.dateColor;
         this.loop();
       } else if(this.type === 'text'){
         this.show = this.info;
       }
     },
     checkEmoji(){
-      const mouse = document.querySelector(`${this.className} .iclock .iclock-body .iclock-mouse`);
+      const mouseDom = document.querySelector(`${this.className} .iclock .iclock-body .iclock-mouse`);
       if(this.emoji === 'smile'){
-        this.smile(mouse);
+        this.smile(mouseDom);
       } else if (this.emoji === 'angry'){
-        this.angry(mouse);
+        this.angry(mouseDom);
       } else if (this.emoji === 'jiong'){
-        this.jiong(mouse);
+        this.jiong(mouseDom);
+      }else if (this.emoji === 'owo'){
+        this.owo(mouseDom);
       }
     },
     errTip(str){
+      const that = this;
       if(this.interval){
         clearInterval(this.interval);
       }
-      const dom = document.querySelector(".iclock .iclock-info");
-      dom.style.color = '#c23531';
-      dom.style.fontSize = this.fontSize;
-      dom.style.fontFamily = this.fontStyle;
+      const infoDom = document.querySelector(".iclock .iclock-info");
+      this.objVal({
+        color: '#c23531',
+        fontSize: that.fontSize,
+        fontFamily: that.fontStyle
+      }, infoDom);
       if(this.type === 'scroll'){
-        dom.style.display = 'block';
-        const scroll = document.querySelector(".iclock .iclock-scroll");
-        scroll.style.display = 'none';
+        infoDom.style.display = 'block';
+        const scrollDom = document.querySelector(".iclock .iclock-scroll");
+        scrollDom.style.display = 'none';
       }
       this.show = 'Error~';
       console.error(str);
     },
     loop(){
       if (this.type === 'scroll'){
-        const dom = document.querySelector(".iclock .iclock-info");
-        dom.style.display = 'none';
+        const infoDom = document.querySelector(".iclock .iclock-info");
+        infoDom.style.display = 'none';
         this.interval = setInterval(() => {
           this.initDate();
           this.getTime();
@@ -161,26 +192,69 @@ export default{
       }
       return { date, week };
     },
-    smile(mouse){
-      mouse.style.borderTop = '80px solid #ccc';
-      mouse.style.borderLeft = '80px solid transparent';
-      mouse.style.borderRight = '80px solid transparent';
+    domHover(dom, fnOver, fnOut ) {
+      dom.onmouseenter = fnOver;
+      dom.onmouseleave = fnOut;
     },
-    angry(mouse){
-      mouse.style.border = '40px solid #d53a35';
-      mouse.style.borderRadius = '10%';
+    objVal(obj, dom){
+      Object.keys(obj).forEach(val => {
+        dom.style[val] = obj[val];
+      })
     },
-    jiong(mouse){
-      const leftEye = document.querySelector(`${this.className} .iclock .iclock-body .iclock-left-eyes`);
-      const rightEye = document.querySelector(`${this.className} .iclock .iclock-body .iclock-right-eyes`);
-      leftEye.style.transform = 'rotate(-10deg)';
-      leftEye.style.webkitTransform = 'rotate(-10deg)';
-      rightEye.style.transform = 'rotate(10deg)';
-      rightEye.style.webkitTransform = 'rotate(10deg)';
-      mouse.style.border = '40px solid #e98f6f';
-      mouse.style.borderRadius = '10%';
-      mouse.style.left = '56px';
-      mouse.style.width = '10px';
+    smile(mouseDom){
+      this.objVal({
+        borderTop: '80px solid #ccc',
+        borderLeft: '80px solid transparent',
+        borderRight: '80px solid transparent'
+      }, mouseDom);
+    },
+    angry(mouseDom){
+      this.objVal({
+        border: '40px solid #d53a35',
+        borderRadius: '10%'
+      }, mouseDom);
+    },
+    jiong(mouseDom){
+      let deg = 10;
+      const leftDom = document.querySelector(`${this.className} .iclock .iclock-body .iclock-left-eyes`);
+      this.objVal({
+        transform: `rotate(${-deg}deg)`,
+        webkitTransform: `rotate(${-deg}deg)`
+      }, leftDom);
+      const rightDom = document.querySelector(`${this.className} .iclock .iclock-body .iclock-right-eyes`);
+      this.objVal({
+        transform: `rotate(${deg}deg)`,
+        webkitTransform: `rotate(${deg}deg)`
+      }, rightDom);
+      this.objVal({
+        border: '40px solid #e98f6f',
+        borderRadius: '10%',
+        left: '56px',
+        width: '10px'
+      }, mouseDom);
+    },
+    owo(mouseDom){
+      let height = '50px', width = '50px';
+      let bothObj = {
+        width: width,
+        height: height,
+        borderRadius: '50%'
+      }
+      const leftDom = document.querySelector(`${this.className} .iclock .iclock-body .iclock-left-eyes`);
+      this.objVal(bothObj, leftDom);
+      const rightDom = document.querySelector(`${this.className} .iclock .iclock-body .iclock-right-eyes`);
+      this.objVal(bothObj, rightDom);
+      this.objVal({
+        position: 'absolute',
+        left: '50%',
+        right: '50%',
+        transform: 'translate(-50%, -50%)',
+        fontSize: '5rem',
+        backgroundColor: '#22ade4',
+        width: '50%',
+        height: '5px'
+      }, mouseDom);
+      // const bodyDom = document.querySelector(`${this.className} .iclock .iclock-body`);
     }
   }
 }
