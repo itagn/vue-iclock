@@ -150,13 +150,13 @@ export default{
         infoDom.style.display = 'none';
         this.interval = setInterval(() => {
           this.initDate();
-          this.getTime();
-        }, 1000);
+        this.getTime();
+      }, 1000);
       } else if (this.type === 'clock'){
         this.interval = setInterval(() => {
           this.initDate();
-          this.show = this.getTime();
-        }, 1000);
+        this.show = this.getTime();
+      }, 1000);
       }
 
     },
@@ -198,7 +198,7 @@ export default{
     },
     objVal(obj, dom){
       Object.keys(obj).forEach(val => {
-        dom.style[val] = obj[val];
+          dom.style[val] = obj[val];
       })
     },
     smile(mouseDom){
