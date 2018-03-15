@@ -121,8 +121,6 @@ export default{
         this.angry(mouseDom);
       } else if (this.emoji === 'jiong'){
         this.jiong(mouseDom);
-      }else if (this.emoji === 'owo'){
-        this.owo(mouseDom);
       }
     },
     errTip(str){
@@ -150,13 +148,13 @@ export default{
         infoDom.style.display = 'none';
         this.interval = setInterval(() => {
           this.initDate();
-        this.getTime();
-      }, 1000);
+          this.getTime();
+        }, 1000);
       } else if (this.type === 'clock'){
         this.interval = setInterval(() => {
           this.initDate();
-        this.show = this.getTime();
-      }, 1000);
+          this.show = this.getTime();
+        }, 1000);
       }
 
     },
@@ -231,28 +229,6 @@ export default{
         borderRadius: '10%',
         left: '56px',
         width: '10px'
-      }, mouseDom);
-    },
-    owo(mouseDom){
-      let height = '50px', width = '50px';
-      let bothObj = {
-        width: width,
-        height: height,
-        borderRadius: '50%'
-      }
-      const leftDom = document.querySelector(`${this.className} .iclock .iclock-body .iclock-left-eyes`);
-      this.objVal(bothObj, leftDom);
-      const rightDom = document.querySelector(`${this.className} .iclock .iclock-body .iclock-right-eyes`);
-      this.objVal(bothObj, rightDom);
-      this.objVal({
-        position: 'absolute',
-        left: '50%',
-        right: '50%',
-        transform: 'translate(-50%, -50%)',
-        fontSize: '5rem',
-        backgroundColor: '#22ade4',
-        width: '50%',
-        height: '5px'
       }, mouseDom);
     }
   }
