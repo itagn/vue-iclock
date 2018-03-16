@@ -7,9 +7,9 @@
 
 ## Introduction
 :rocket: a cute clock components with vuejs
+##example
+Looking [example](https://itagn.github.io/vue-iclock/dist/index.html) about vue-iclock  
 ## screenshot
-[example](https://itagn.github.io/vue-iclock/dist/)  
-
 Try to move the mouse to the face.  
 
     if you set display.type = 'clock' && set display.language = 'zh' or 'en'
