@@ -18,7 +18,7 @@ export default{
       show: '',
       date: '',
       week: '',
-      type: this.display.type || 'clock',
+      type: this.display.type || 'scroll',
       language: this.display.language === 'en' ? 'en' : 'zh',
       emoji: this.display.emoji || 'smile',
       className: this.display.className || '',
