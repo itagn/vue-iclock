@@ -6,8 +6,9 @@
 </p>
 
 ## Introduction
-:rocket: a cute clock components with vuejs
-##example
+:rocket: a cute clock components with vuejs  
+
+## example
 Looking [example](https://itagn.github.io/vue-iclock/dist/index.html) about vue-iclock  
 ## screenshot
 Try to move the mouse to the face.  
