@@ -13,17 +13,13 @@ Looking [example](https://itagn.github.io/vue-iclock/dist/index) about vue-icloc
 ## Screenshot
 Try to move the mouse to the face.  
 
-    if you set display.type = 'clock' && set display.language = 'zh' or 'en'
+    if you set display.type = 'scroll' && set display.language = 'zh' or 'en'
 
 ![clock-zh.png](https://github.com/itagn/vue-iclock/raw/master/img/clock-zh.png) ![clock-en.png](https://github.com/itagn/vue-iclock/raw/master/img/clock-en.png)
 
     if you set display.type = 'text' && set display.info = 'Itagn' 
 
 ![text.png](https://github.com/itagn/vue-iclock/raw/master/img/text.png)
-
-    if you want a scrolling clock, and you should set display.type = 'scroll'
-
-![scroll.png](https://github.com/itagn/vue-iclock/raw/master/img/scroll.png)
 
     if you want to change the expression, and you should set display.emoji = 'angry' or 'jiong'
 
@@ -64,7 +60,8 @@ export default {
                 className: '#clock',
                 emoji: 'smile',
                 hoverAnimation: true,
-                glasses: false
+                glasses: false,
+                scale: 1
             }
         }
     }
@@ -85,14 +82,14 @@ In order to judge display clock or text by setting display
 
     Type: Object
     Default: {
-        type: 'clock',  //  value: 'clock' || 'text' || 'scroll'
+        type: 'scroll',  //  value: 'scroll' || 'text' || 'clock'
         info: 'o w o',  //  if this.type is 'text', and show this.info
         className: '',  //  set className when more than one iclock component on the page
         scale: 1,  //  Magnification
         emoji: 'smile',  //  value: 'smile' || 'angry' || 'jiong'
         glasses: false,  //  Choose whether to wear glasses
         hoverAnimation: fasle,  //  Choose whether to open animation of clock
-        language: 'en',  //  language
+        language: 'zh',  //  language, value: 'zh' || 'en'
         dateColor: '#999',  //  set date-color
         fontColor: 'orange',  //  set font-color
         fontSize: '1.5rem',  //  set font-size
