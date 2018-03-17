@@ -8,24 +8,25 @@
 ## Introduction
 :rocket: a cute clock components with vuejs  
 
+[中文文档](https://github.com/itagn/vue-iclock/blob/master/README-ZH.md)  
 ## Example
 Looking [example](https://itagn.github.io/vue-iclock/dist/index) about vue-iclock  
 ## Screenshot
 Try to move the mouse to the face.  
 
-    if you set display.type = 'scroll' && set display.language = 'zh' or 'en'
+    if you set type: 'scroll' and language: 'zh' or 'en', hoverAnimation: true
 
 ![clock-zh.png](https://github.com/itagn/vue-iclock/raw/master/img/clock-zh.png) ![clock-en.png](https://github.com/itagn/vue-iclock/raw/master/img/clock-en.png)
 
-    if you set display.type = 'text' && set display.info = 'Itagn' 
+    if you set type: 'text' and info = 'Itagn' 
 
 ![text.png](https://github.com/itagn/vue-iclock/raw/master/img/text.png)
 
-    if you want to change the expression, and you should set display.emoji = 'angry' or 'jiong'
+    if you want to change the expression, and you should set emoji: 'angry' or 'jiong'
 
 ![angry.png](https://github.com/itagn/vue-iclock/raw/master/img/angry.png) ![jiong.png](https://github.com/itagn/vue-iclock/raw/master/img/jiong.png)
 
-    let the cute clock wear glasses, and you should set display.glasses = true
+    let the cute clock wear glasses, and you should set glasses: true
 
 ![glasses.png](https://github.com/itagn/vue-iclock/raw/master/img/glasses.png)
 
@@ -78,7 +79,7 @@ export default {
 ## Api
 - `display`  
 
-In order to judge display clock or text by setting display  
+You can follow the instructions below to set  
 
     Type: Object
     Default: {
