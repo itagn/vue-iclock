@@ -9,8 +9,10 @@
 :rocket: a cute clock components with vuejs  
 
 [中文文档](https://github.com/itagn/vue-iclock/blob/master/README-ZH.md)  
-## Example
-Looking [example](https://itagn.github.io/vue-iclock/dist/index) about vue-iclock  
+
+## DEMO
+[DEMO](https://itagn.github.io/vue-iclock/dist/index)  
+
 ## Screenshot
 Try to move the mouse to the face.  
 

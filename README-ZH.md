@@ -9,8 +9,9 @@
 :rocket: 可爱的vue时钟组件  
 
 [English doc](https://github.com/itagn/vue-iclock/blob/master/README.md)  
-## 例子
-[【例子】](https://itagn.github.io/vue-iclock/dist/index)，可以看看vue-iclock的效果  
+
+## DEMO
+[DEMO](https://itagn.github.io/vue-iclock/dist/index)  
 
 ## Screenshot
 你可以试着把鼠标移动到表情上
