@@ -1,29 +1,29 @@
 <template>
   <div>
     <div class="iclock">
-      <div class="iclock-time" v-if="type==='clock' || type ==='scroll'">
+      <div class="iclock-time" v-if="api.type==='clock' || api.type ==='scroll'">
         <span class="iclock-week">
-          {{ week }}
+          {{ ymd.week }}
         </span>
-        <span class="iclock-date">{{ date }}</span>
+        <span class="iclock-date">{{ ymd.date }}</span>
       </div>
       <div class="iclock-show">
-        <div class="iclock-info" >
+        <div class="iclock-info">
           {{ show }}
         </div>
-        <div v-if=" type === 'scroll' " class="iclock-scroll">
-          <img :src="scrollUrl" alt="hours-first" :class="hf" />
-          <img :src="scrollUrl" alt="hours-second" :class="hs" />
+        <div v-if="api.type === 'scroll'" class="iclock-scroll">
+          <img :src="scrollUrl" alt="hours-first" :class="hms.hf" />
+          <img :src="scrollUrl" alt="hours-second" :class="hms.hs" />
           <span>:</span>
-          <img :src="scrollUrl" alt="minutes-first" :class="mf" />
-          <img :src="scrollUrl" alt="minutes-second" :class="ms" />
+          <img :src="scrollUrl" alt="minutes-first" :class="hms.mf" />
+          <img :src="scrollUrl" alt="minutes-second" :class="hms.ms" />
           <span>:</span>
-          <img :src="scrollUrl" alt="seconds-first" :class="sf" />
-          <img :src="scrollUrl" alt="seconds-second" :class="ss" />
+          <img :src="scrollUrl" alt="seconds-first" :class="hms.sf" />
+          <img :src="scrollUrl" alt="seconds-second" :class="hms.ss" />
         </div>
       </div>
       <div class="iclock-body">
-        <div class="glasses" v-if="glasses">
+        <div class="glasses" v-if="api.glasses">
           <div class="glasses-left"></div>
           <div class="glasses-mid"></div>
           <div class="glasses-right"></div>
