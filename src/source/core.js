@@ -1,5 +1,6 @@
 import time from './time.png'
-import { dateFormat, timeFormat, objVal, domHover, getDom } from '../util/index'
+import { dateFormat, timeFormat, objVal, domHover, getDom } from '../util/tool'
+import { smile, angry, jiong } from '../util/emoji'
 export default{
   props: {
     display: {
@@ -25,13 +26,13 @@ export default{
       },
       api: {
         type: this.display.type || 'scroll',
-        language: this.display.language === 'en' ? 'en' : 'zh',
+        language: this.display.language || 'zh',
         emoji: this.display.emoji || 'smile',
         className: this.display.className || '',
-        glasses: this.display.glasses ? true : false,
+        glasses: this.display.glasses || false,
         scale: +this.display.scale || 1,
         info: this.display.info || 'o w o',
-        hoverAnimation: this.display.hoverAnimation ? true : false,
+        hoverAnimation: this.display.hoverAnimation || true,
         fontSize: this.display.fontSize || '1.5rem',
         fontColor: this.display.fontColor || 'orange',
         fontStyle: this.display.fontStyle || "Helvetica,'Microsoft YaHei'",
@@ -124,13 +125,12 @@ export default{
       }
     },
     checkEmoji(){
-      const mouseDom = getDom(this.api.className, '.iclock-body .iclock-mouse')
       if(this.api.emoji === 'smile'){
-        this.smile(mouseDom)
+        smile(this.api.className)
       } else if (this.api.emoji === 'angry'){
-        this.angry(mouseDom)
+        angry(this.api.className)
       } else if (this.api.emoji === 'jiong'){
-        this.jiong(mouseDom)
+        jiong(this.api.className)
       }
     },
     errTip(str){
@@ -157,38 +157,6 @@ export default{
       this.interval = setInterval(() => {
         this.initDate()
       }, 1000)
-    },
-    smile(mouseDom){
-      objVal({
-        borderTop: '80px solid #ccc',
-        borderLeft: '80px solid transparent',
-        borderRight: '80px solid transparent'
-      }, mouseDom)
-    },
-    angry(mouseDom){
-      objVal({
-        border: '40px solid #d53a35',
-        borderRadius: '10%'
-      }, mouseDom)
-    },
-    jiong(mouseDom){
-      let deg = 10
-      const leftDom = getDom(this.api.className, '.iclock-body .iclock-left-eyes')
-      objVal({
-        transform: `rotate(${-deg}deg)`,
-        webkitTransform: `rotate(${-deg}deg)`
-      }, leftDom)
-      const rightDom = getDom(this.api.className,'.iclock-body .iclock-right-eyes')
-      objVal({
-        transform: `rotate(${deg}deg)`,
-        webkitTransform: `rotate(${deg}deg)`
-      }, rightDom)
-      objVal({
-        border: '40px solid #e98f6f',
-        borderRadius: '10%',
-        left: '56px',
-        width: '10px'
-      }, mouseDom)
     }
   }
 }
