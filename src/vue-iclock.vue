@@ -38,7 +38,7 @@
     </div>
   </div>
 </template>
-<script src="./source/core.js"></script>
+<script src="./source/js/core.js"></script>
 <style>
-@import url('./source/index.css');
+@import url('./source/css/index.css');
 </style>

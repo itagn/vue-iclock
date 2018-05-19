@@ -1,6 +1,6 @@
-import time from './time.png'
-import { dateFormat, timeFormat, objVal, domHover, getDom } from '../util/tool'
-import { smile, angry, jiong } from '../util/emoji'
+import time from '../img/time.png'
+import { dateFormat, timeFormat, objVal, domHover, getDom } from './tool'
+import { smile, angry, jiong } from './emoji'
 export default{
   props: {
     display: {
